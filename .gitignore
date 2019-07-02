@@ -1,4 +1,5 @@
-.idea
+.idea/
+.sublime-project
 
 ###> symfony/framework-bundle ###
 /.env.local
@@ -13,3 +14,7 @@
 .phpunit
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
+
+###> lexik/jwt-authentication-bundle ###
+/config/jwt/*.pem
+###< lexik/jwt-authentication-bundle ###
