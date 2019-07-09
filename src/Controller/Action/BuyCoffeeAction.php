@@ -41,11 +41,7 @@ class BuyCoffeeAction
 
         $this->validator->validate($data);
 
-        $order = $this->processor->process($user, $data, $data->getUnitsAndClean());
-
-        $this->entityManager->persist($order);
-        $this->entityManager->persist($data);
-        $this->entityManager->flush();
+        $this->processor->process($user, $data, $data->getUnitsAndClean());
 
         return $data;
     }

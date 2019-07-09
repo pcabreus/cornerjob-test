@@ -6,7 +6,6 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "api-platform/api-pack": "^1.2",
-        "doctrine/doctrine-fixtures-bundle": "^3.2",
         "lexik/jwt-authentication-bundle": "^2.6",
         "sensio/framework-extra-bundle": "^5.3",
         "symfony/console": "4.3.*",
@@ -19,7 +18,8 @@
         "symfony/yaml": "4.3.*"
     },
     "require-dev": {
-        "symfony/profiler-pack": "^1.0"
+        "symfony/profiler-pack": "^1.0",
+        "doctrine/doctrine-fixtures-bundle": "^3.2"
     },
     "config": {
         "preferred-install": {

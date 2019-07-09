@@ -5,7 +5,9 @@ namespace App\OrderProcessor;
 use App\Entity\Coffee;
 use App\Entity\Order;
 use App\Entity\User;
+use App\Factory\OrderFactory;
 use App\Inventory\InventoryOperator;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Class OrderProcessor
@@ -14,10 +16,14 @@ use App\Inventory\InventoryOperator;
 class OrderProcessor
 {
     private $inventorOperator;
+    private $orderFactory;
+    private $entityManager;
 
-    public function __construct(InventoryOperator $inventorOperator)
+    public function __construct(OrderFactory $orderFactory, InventoryOperator $inventorOperator, EntityManagerInterface $entityManager)
     {
+        $this->orderFactory = $orderFactory;
         $this->inventorOperator = $inventorOperator;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -39,11 +45,11 @@ class OrderProcessor
         // Calculate the amount for the current coffee
         $amount = $this->calculateAmount($coffee->getPrice(), $units);
 
-        $order = (new Order())
-            ->setCoffee($coffee)
-            ->setUser($user)
-            ->setQuantity($units)
-            ->setAmount($amount);
+        $order = $this->orderFactory->create($coffee, $user, $units, $amount);
+
+        $this->entityManager->persist($order);
+        $this->entityManager->persist($coffee);
+        $this->entityManager->flush();
 
         return $order;
     }
